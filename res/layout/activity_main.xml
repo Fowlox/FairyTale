@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/main_background"
+    tools:context=".MainLayout">
+
+
+    <ImageView
+        android:id="@+id/main_logo"
+        android:src="@drawable/main_logo"
+        android:background="@android:color/transparent"
+        android:layout_weight="100"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="0px" />
+
+    <ImageButton
+        android:id="@+id/right_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="10"
+        android:src="@drawable/start_btn"
+        android:background="@android:color/transparent"/>
+
+    <ImageButton
+        android:id="@+id/left_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="10"
+        android:src="@drawable/describe_btn"
+        android:background="@android:color/transparent"/>
+
+    <ImageButton
+        android:id="@+id/x_close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="10"
+        android:src="@drawable/option_btn"
+        android:background="@android:color/transparent"/>
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/start_btn"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="2"-->
+        <!--android:src="@drawable/start_btn"-->
+        <!--android:background="@android:color/transparent"/>-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/describe_btn"-->
+        <!--android:layout_below="@+id/start_btn"-->
+        <!--android:layout_alignLeft="@+id/start_btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/describe_btn"-->
+        <!--android:background="@android:color/transparent"/>-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/option_btn"-->
+        <!--android:layout_below="@+id/describe_btn"-->
+        <!--android:layout_alignLeft="@+id/start_btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/option_btn"-->
+        <!--android:background="@android:color/transparent"/>-->
+</LinearLayout>
