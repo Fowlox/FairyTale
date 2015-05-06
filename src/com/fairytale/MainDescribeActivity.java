@@ -26,10 +26,10 @@ public class MainDescribeActivity extends Activity {
     }
 
     public void onClick(View view) {
-        TextView des = (TextView)findViewById(R.id.describe_text);
-        TextView text = (TextView)findViewById(R.id.current_page);
-        ImageButton rightBtn = (ImageButton)findViewById(R.id.right_btn);
-        ImageButton leftBtn = (ImageButton)findViewById(R.id.left_btn);
+        TextView text = (TextView) findViewById(R.id.current_page);
+        TextView des = (TextView) findViewById(R.id.describe_text);
+        ImageButton rightBtn = (ImageButton) findViewById(R.id.right_btn);
+        ImageButton leftBtn = (ImageButton) findViewById(R.id.left_btn);
 
         switch (view.getId()) {
             case R.id.x_close_btn:
@@ -38,9 +38,9 @@ public class MainDescribeActivity extends Activity {
 
             case R.id.left_btn:
                 --counter;
-                des.setText(R.string.des1);
-                text.setText(counter+"/5");
-                if(counter == 1){
+                changeText(counter);
+                text.setText(counter + "/5");
+                if (counter == 1) {
                     leftBtn.setVisibility(View.INVISIBLE);
                 }
                 rightBtn.setVisibility(View.VISIBLE);
@@ -48,11 +48,32 @@ public class MainDescribeActivity extends Activity {
 
             case R.id.right_btn:
                 ++counter;
-                text.setText(counter+"/5");
-                if(counter == 5){
+                changeText(counter);
+                text.setText(counter + "/5");
+                if (counter == 5) {
                     rightBtn.setVisibility(View.INVISIBLE);
                 }
                 leftBtn.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+    public void changeText(int num){
+        TextView des = (TextView) findViewById(R.id.describe_text);
+        switch(num) {
+            case 1:
+                des.setText(R.string.des1);
+                break;
+            case 2:
+                des.setText(R.string.des2);
+                break;
+            case 3:
+                des.setText(R.string.des3);
+                break;
+            case 4:
+                des.setText(R.string.des4);
+                break;
+            case 5:
+                des.setText(R.string.des5);
                 break;
         }
     }
