@@ -1,6 +1,8 @@
-CREATE TABLE story (story_id INTEGER PRIMARY KEY, story_title TEXT, thum_url TEXT);
-CREATE TABLE item (story_id INTEGER PRIMARY KEY, item_id INTEGER PRIMARY KEY, FOREIGN KEY(story_id) REFERENCES story(story_id));
-CREATE TABLE image (story_id INTEGER PRIMARY KEY, item_id INTEGER PRIMARY KEY, img_num INTEGER PRIMARY KEY, img_url TEXT, FOREIGN KEY(story_id) REFERENCE item(story_id), FOREIGN KEY(item_id) REFERENCE item(item_id));
-CREATE TABLE sound (story_id INTEGER PRIMARY KEY, item_id INTEGER PRIMARY KEY, sound_num INTEGER PRIMARY KEY, sound_url TEXT, FOREIGN KEY(story_id) REFERENCE item(story_id), FOREIGN KEY(item_id) REFERENCE item(item_id));
-CREATE TABLE text (story_id INTEGER PRIMARY KEY, item_id INTEGER PRIMARY KEY, text_num INTEGER PRIMARY KEY, text_url TEXT, text_time INTEGER, FOREIGN KEY(story_id) REFERENCE item(story_id), FOREIGN KEY(item_id) REFERENCE item(item_id));
-CREATE TABLE bgm (story_id INTEGER PRIMARY KEY, item_id INTEGER PRIMARY KEY, bgm_num INTEGER PRIMARY KEY, bgm_url TEXT, FOREIGN KEY(story_id) REFERENCE item(story_id), FOREIGN KEY(item_id) REFERENCE item(item_id));
+CREATE TABLE story (story_id INTEGER, story_title TEXT, story_thumb BLOB, PRIMARY KEY(story_id));
+CREATE TABLE item (story_id INTEGER, item_id INTEGER, item_type INTEGER, PRIMARY KEY(story_id,item_id), FOREIGN KEY(story_id) REFERENCES story(story_id));
+CREATE TABLE image (story_id INTEGER, item_id INTEGER, image_num INTEGER, image BLOB, PRIMARY KEY(story_id,item_id,img_num), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
+CREATE TABLE sound (story_id INTEGER, item_id INTEGER, sound BLOB, PRIMARY KEY(story_id,item_id), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
+CREATE TABLE text (story_id INTEGER, item_id INTEGER, text_num INTEGER, text TEXT, text_time INTEGER, PRIMARY KEY(story_id,item_id,text_num), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
+CREATE TABLE bgm (story_id INTEGER, item_id INTEGER, bgm BLOB, PRIMARY KEY(story_id,item_id,bgm_num), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
+CREATE TABLE dataversion (key TEXT, value INTEGER,PRIMARY KEY(key));
+INSERT INTO dataversion(key, value) VALUES('version',0)

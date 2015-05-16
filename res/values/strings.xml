@@ -2,6 +2,12 @@
 <resources>
 
     <string name="app_name">FairyTale</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="intro_popup_title">새로운 버전</string>
+    <string name="intro_popup_content">새로운 버전의 어플리케이션이 있습니다.\n스토어 페이지로 이동합니다.</string>
+    <string name="inrto_popup_confitm">이동</string>
+    <string name="intro_popup_exit">종료</string>
+    <string name="intro_version_check">버전 확인중입니다.</string>
+    <string name="intro_update_check">업데이트 정보를 확인중입니다.</string>
+    <string name="debug_msg">테스트</string>
 
 </resources>
