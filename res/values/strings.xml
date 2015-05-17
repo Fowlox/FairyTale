@@ -5,5 +5,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_game_puzzle">GamePuzzleActivity</string>
     <string name="action_settings">Settings</string>
+    <color name="puzzle_background_color">#FDB05E</color>
+    <color name="puzzle_background_color_2">#0C9D19</color>
+    <color name="Black">#000000</color>
+    <color name="White">#FFFFFF</color>
 
 </resources>
