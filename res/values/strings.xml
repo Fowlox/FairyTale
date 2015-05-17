@@ -3,5 +3,7 @@
 
     <string name="app_name">FairyTale</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_game_puzzle">GamePuzzleActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
