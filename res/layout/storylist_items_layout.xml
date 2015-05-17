@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_weight="0.03"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"></LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.4"
+        android:weightSum="1920"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_weight="240"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/black"
+            android:orientation="vertical"
+            android:layout_weight="320"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:weightSum="5">
+
+            <ImageButton
+                android:id="@+id/storylist_thumb1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                android:src="@drawable/dummy"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/storylist_title1"
+                android:text="weather"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_weight="240"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/black"
+            android:orientation="vertical"
+            android:layout_weight="320"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:weightSum="5">
+            <ImageButton
+                android:id="@+id/storylist_thumb2"
+                android:layout_weight="4"
+                android:scaleType="centerInside"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/dummy"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/storylist_title2"
+                android:text="dragon"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_weight="240"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/black"
+            android:orientation="vertical"
+            android:layout_weight="320"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:weightSum="5">
+            <ImageButton
+                android:id="@+id/storylist_thumb3"
+                android:layout_weight="4"
+                android:scaleType="centerInside"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/dummy"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/storylist_title3"
+                android:text="car"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_weight="240"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.03"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"></LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.4"
+        android:weightSum="1920"
+        android:orientation="horizontal"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_weight="240"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/black"
+            android:orientation="vertical"
+            android:layout_weight="320"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:weightSum="5">
+            <ImageButton
+                android:id="@+id/storylist_thumb4"
+                android:layout_weight="4"
+                android:scaleType="centerInside"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/dummy"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/storylist_title4"
+                android:text="earth"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_weight="240"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/black"
+            android:orientation="vertical"
+            android:layout_weight="320"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:weightSum="5">
+            <ImageButton
+                android:id="@+id/storylist_thumb5"
+                android:layout_weight="4"
+                android:scaleType="centerInside"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/dummy"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/storylist_title5"
+                android:text="heart"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_weight="240"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/black"
+            android:orientation="vertical"
+            android:layout_weight="320"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:weightSum="5">
+            <ImageButton
+                android:id="@+id/storylist_thumb6"
+                android:layout_weight="4"
+                android:scaleType="centerInside"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/dummy"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/storylist_title6"
+                android:text="puzzle"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_weight="240"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.03"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"></LinearLayout>
+
+</LinearLayout>

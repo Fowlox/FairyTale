@@ -38,19 +38,19 @@ public class IntroLoadingModel {
 		Integer[] list = new Integer[required.keySet().size()];
 		return required.keySet().toArray(list);
 	}
-	public void itemUpdateList(){
-		
+	public int itemUpdateLength(int story_id){
+		return required.get(story_id).size();
 	}
-	public void imageUpdateList(){
-		
+	public int imageUpdateLength(int story_id, int item_id){
+		return this.required.get(story_id).get(item_id)[0];
 	}
-	public void soundUpdateList(){
-		
+	public int soundUpdateLength(int story_id, int item_id){
+		return this.required.get(story_id).get(item_id)[1];
 	}
-	public void bgmUpdateList(){
-		
+	public int bgmUpdateLength(int story_id, int item_id){
+		return this.required.get(story_id).get(item_id)[2];
 	}
-	public void textUpdateList(){
-		
+	public int textUpdateLength(int story_id, int item_id){
+		return this.required.get(story_id).get(item_id)[3];
 	}
 }

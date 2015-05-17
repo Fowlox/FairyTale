@@ -25,6 +25,10 @@ public class Converter {
 	 
 		return bitmap;
 	}
+	public static Drawable bitmapToDrawable(Context context, Bitmap bitmap){
+		Drawable drawable = new BitmapDrawable(context.getResources(),bitmap);
+		return drawable;
+	}
 	public static byte[] fileToByte(File audio){
 		byte[] byte_audio;
 		try{

@@ -1,9 +1,18 @@
 package com.fairytale;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -126,7 +135,11 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 			publishProgress(DEBUGING,0);
 			//서버와 디바이스간 비교
 			publishProgress(UPDATE_CHECK);
-			getDataFromServer();
+			try {
+				getDataFromServer();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			while(status){
 				try{
 					publishProgress(DEBUGING,1);
@@ -178,16 +191,72 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 			//추가리스트1
 			HashMap<Integer,HashMap<Integer,Integer[]>> info = new HashMap<Integer,HashMap<Integer,Integer[]>>();
 			HashMap<Integer,Integer[]> item_map = new HashMap<Integer,Integer[]>();
-			Integer[][] items = new Integer[3][];
-			for(int item_loop = 0; item_loop<items.length;item_loop++){
-				items[item_loop] = new Integer[]{2,1,0,0};
-				item_map.put(item_loop, items[item_loop]);
+			
+			try {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(getApplicationContext().getAssets().open("story_"+1+"/info.story")));
+				String[] datas = reader.readLine().split(",");
+				Integer[][] items = new Integer[Integer.parseInt(datas[1])][];
+				for(int item_loop = 0; item_loop<items.length;item_loop++){
+					datas = reader.readLine().split(",");
+					items[item_loop] = new Integer[]{Integer.parseInt(datas[1]),Integer.parseInt(datas[2]),Integer.parseInt(datas[3]),Integer.parseInt(datas[4])};
+					item_map.put(item_loop, items[item_loop]);
+				}
+				
+				info.put(1, item_map);
+				model.setUpdate(info);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			
-			info.put(1, item_map);
 		}
-		private void getDataFromServer(){
-			
+		private void getDataFromServer() throws Exception{
+			Integer[] ids = model.storyUpdateList();
+			AssetManager asset_mgr = getApplicationContext().getAssets();
+			InputStream is;
+			for(int update_loop = 0; update_loop<ids.length; update_loop++){
+				if(dba.getInt("STORY_ID", "STORY", new String[]{"STORY"}, new String[]{""+ids[update_loop]}) == -1){
+					int s_id = ids[update_loop];
+					BufferedReader reader = new BufferedReader(new InputStreamReader(asset_mgr.open("story_"+1+"/info.story")));
+					String[] datas = reader.readLine().split(",");
+					
+					StoryModel story = new StoryModel(dba, getApplicationContext(), s_id);
+					story.setTitle(datas[0]);
+					
+					is = asset_mgr.open("story_"+s_id+"/thumb.png");
+					story.setThumbnail(Converter.drawableToBitmap(Drawable.createFromStream(is, null)));
+					is.close();
+					
+					story.initialItem(model.itemUpdateLength(s_id));
+					for(int item_loop=0; item_loop<model.itemUpdateLength(s_id); item_loop++){
+						datas = reader.readLine().split(",");
+						story.getItem(item_loop).setType(datas[0]);
+						story.getItem(item_loop).initialItem(Integer.parseInt(datas[1]), Integer.parseInt(datas[2]), Integer.parseInt(datas[3]), Integer.parseInt(datas[4]));
+						for(int image_loop=0; image_loop<model.imageUpdateLength(s_id, item_loop); image_loop++){
+							is = asset_mgr.open("story_"+s_id+"/scene"+(item_loop+1)+"-"+(image_loop+1)+".png");	
+							story.getItem(item_loop).getImage(image_loop).setImage(Converter.drawableToBitmap(Drawable.createFromStream(is, null)));
+							is.close();
+						}
+						for(int sound_loop=0; sound_loop<model.soundUpdateLength(s_id, item_loop); sound_loop++){
+							File file = File.createTempFile("temp_"+System.currentTimeMillis(), "mp3", getApplicationContext().getCacheDir());
+							is = asset_mgr.open("story_"+s_id+"/scene"+(item_loop+1)+".mp3");
+							OutputStream os = new FileOutputStream(file);
+							byte[] buffer = new byte[1024];
+							int len = 0;
+							while((len = is.read(buffer))>0) os.write(buffer, 0, len);
+							story.getItem(item_loop).getSound(sound_loop).setAudio(file);
+							os.close();
+							is.close();
+						}
+						for(int bgm_loop=0; bgm_loop<model.bgmUpdateLength(s_id, item_loop); bgm_loop++){
+							story.getItem(item_loop).getBgm(bgm_loop).setAudio(null);
+						}
+						for(int text_loop=0; text_loop<model.textUpdateLength(s_id, item_loop); text_loop++){
+							story.getItem(item_loop).getText(text_loop).setText(null);
+						}
+					}					
+					story.insertToDatabase();
+				}
+			}
+			asset_mgr.close();
 		}
 		
 	}

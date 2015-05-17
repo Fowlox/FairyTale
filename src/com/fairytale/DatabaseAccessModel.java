@@ -86,7 +86,8 @@ public class DatabaseAccessModel {
 		cursor.close();
 		
 		if(number == null){
-			mLog.e("Loading BLOB data from database is failure");
+			mLog.d("No data in "+table);
+			return -1;
 		}
 		db.close();
 		return number.intValue();
@@ -207,6 +208,7 @@ public class DatabaseAccessModel {
 					db.execSQL(query);
 					query = reader.readLine();
 				}
+				asset_mgr.close();
 			}catch (IOException e){
 				e.printStackTrace();
 			}
