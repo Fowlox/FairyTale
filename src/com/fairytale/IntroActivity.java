@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
@@ -44,7 +45,7 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 
 		mLog.d("Test Intro Activity Execution");
 		
-		new LoadingJob().execute();
+		new LoadingJob(this).execute();
 		
 	}
 	
@@ -89,8 +90,18 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 		private final Integer SERVER_CHECK = 2;
 		private final Integer UPDATE_CHECK = 3;
 		private final Integer DEBUGING = 4;
+		private final Integer UPDATE_PROGRESS = 5;
 		private boolean status;
 		
+		private Context context;
+		private AssetManager asset_mgr;
+		private InputStream ais;
+		
+		public LoadingJob(Context context){
+			this.context = context;
+			asset_mgr = context.getAssets();
+			ais = null;
+		}
 		@Override
 		protected void onPreExecute(){
 			super.onPreExecute();
@@ -168,6 +179,35 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 				else{
 					if(!debuging_point) status = false;
 				}
+			}else if(progress[0] == UPDATE_PROGRESS){
+				Context context = getApplicationContext();
+				AssetManager asset_mgr = context.getAssets();
+				if(progress[1] == 0){
+					try {
+						ais = asset_mgr.open("story_"+progress[2]+"/info.story");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}else if(progress[1] == 1){
+					try {
+						ais = asset_mgr.open("story_"+progress[2]+"/thumb.png");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}else if(progress[1] == 2){
+					try {
+						ais = asset_mgr.open("story_"+progress[2]+"/scene"+progress[3]+"-"+progress[4]+".png");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}else if(progress[1] == 3){
+					try {
+						ais = asset_mgr.open("story_"+progress[2]+"/scene"+progress[3]+".mp3");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				asset_mgr.close();
 			}
 			//mLog.d("Exist Progress Update");
 		}
@@ -191,13 +231,18 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 			//추가리스트1
 			HashMap<Integer,HashMap<Integer,Integer[]>> info = new HashMap<Integer,HashMap<Integer,Integer[]>>();
 			HashMap<Integer,Integer[]> item_map = new HashMap<Integer,Integer[]>();
-			
+			mLog.i("Start getUpdateInfo");
 			try {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(getApplicationContext().getAssets().open("story_"+1+"/info.story")));
+				mLog.d("get information of story_id:"+1);
+				publishProgress(UPDATE_PROGRESS,0,1);
+				//BufferedReader reader = new BufferedReader(new InputStreamReader(asset_mgr.open("story_"+1+"/info.story")));
+				BufferedReader reader = new BufferedReader(new InputStreamReader(ais));
 				String[] datas = reader.readLine().split(",");
+				mLog.d("sroty info -> title:"+datas[0]+", number of scene:"+datas[1]);
 				Integer[][] items = new Integer[Integer.parseInt(datas[1])][];
 				for(int item_loop = 0; item_loop<items.length;item_loop++){
 					datas = reader.readLine().split(",");
+					mLog.d("scene info -> type:"+datas[0]+", num_img:"+datas[1]+", num_sound:"+datas[2]+", num_bgm:"+datas[3]+", num_txt:"+datas[4]);
 					items[item_loop] = new Integer[]{Integer.parseInt(datas[1]),Integer.parseInt(datas[2]),Integer.parseInt(datas[3]),Integer.parseInt(datas[4])};
 					item_map.put(item_loop, items[item_loop]);
 				}
@@ -207,22 +252,26 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			mLog.i("End getUpdateInfo");
 		}
 		private void getDataFromServer() throws Exception{
+			mLog.i("Start getDataFromServer");
 			Integer[] ids = model.storyUpdateList();
-			AssetManager asset_mgr = getApplicationContext().getAssets();
 			InputStream is;
 			for(int update_loop = 0; update_loop<ids.length; update_loop++){
-				if(dba.getInt("STORY_ID", "STORY", new String[]{"STORY"}, new String[]{""+ids[update_loop]}) == -1){
+				if(dba.getInt("STORY_ID", "STORY", new String[]{"STORY_ID"}, new String[]{""+ids[update_loop]}) == -1){
 					int s_id = ids[update_loop];
-					BufferedReader reader = new BufferedReader(new InputStreamReader(asset_mgr.open("story_"+1+"/info.story")));
+					publishProgress(UPDATE_PROGRESS,0,1);
+//					BufferedReader reader = new BufferedReader(new InputStreamReader(asset_mgr.open("story_"+1+"/info.story")));
+					BufferedReader reader = new BufferedReader(new InputStreamReader(ais));
 					String[] datas = reader.readLine().split(",");
 					
-					StoryModel story = new StoryModel(dba, getApplicationContext(), s_id);
+					StoryModel story = new StoryModel(dba, context, s_id);
 					story.setTitle(datas[0]);
 					
-					is = asset_mgr.open("story_"+s_id+"/thumb.png");
-					story.setThumbnail(Converter.drawableToBitmap(Drawable.createFromStream(is, null)));
+					publishProgress(UPDATE_PROGRESS,1,1);
+					is = context.getAssets().open("story_"+s_id+"/thumb.png");
+					story.setThumbnail(Converter.drawableToBitmap(Drawable.createFromStream(ais, null)));
 					is.close();
 					
 					story.initialItem(model.itemUpdateLength(s_id));
@@ -231,17 +280,19 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 						story.getItem(item_loop).setType(datas[0]);
 						story.getItem(item_loop).initialItem(Integer.parseInt(datas[1]), Integer.parseInt(datas[2]), Integer.parseInt(datas[3]), Integer.parseInt(datas[4]));
 						for(int image_loop=0; image_loop<model.imageUpdateLength(s_id, item_loop); image_loop++){
-							is = asset_mgr.open("story_"+s_id+"/scene"+(item_loop+1)+"-"+(image_loop+1)+".png");	
-							story.getItem(item_loop).getImage(image_loop).setImage(Converter.drawableToBitmap(Drawable.createFromStream(is, null)));
+							publishProgress(UPDATE_PROGRESS,2,s_id,item_loop+1,image_loop+1);
+							is = context.getAssets().open("story_"+s_id+"/scene"+(item_loop+1)+"-"+(image_loop+1)+".png");	
+							story.getItem(item_loop).getImage(image_loop).setImage(Converter.drawableToBitmap(Drawable.createFromStream(ais, null)));
 							is.close();
 						}
 						for(int sound_loop=0; sound_loop<model.soundUpdateLength(s_id, item_loop); sound_loop++){
-							File file = File.createTempFile("temp_"+System.currentTimeMillis(), "mp3", getApplicationContext().getCacheDir());
-							is = asset_mgr.open("story_"+s_id+"/scene"+(item_loop+1)+".mp3");
+							File file = File.createTempFile("temp_"+System.currentTimeMillis(), "mp3", context.getCacheDir());
+							publishProgress(UPDATE_PROGRESS,3,s_id,item_loop+1);
+							is = context.getAssets().open("story_"+s_id+"/scene"+(item_loop+1)+".mp3");
 							OutputStream os = new FileOutputStream(file);
 							byte[] buffer = new byte[1024];
 							int len = 0;
-							while((len = is.read(buffer))>0) os.write(buffer, 0, len);
+							while((len = ais.read(buffer))>0) os.write(buffer, 0, len);
 							story.getItem(item_loop).getSound(sound_loop).setAudio(file);
 							os.close();
 							is.close();
@@ -256,8 +307,7 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 					story.insertToDatabase();
 				}
 			}
-			asset_mgr.close();
+			mLog.i("End getDataFromServer");
 		}
-		
 	}
 }
