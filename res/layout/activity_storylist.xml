@@ -3,11 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical"
     tools:context=".StoryListActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+    <LinearLayout
+        android:layout_weight="0.11"
+        android:weightSum="1"
+        android:orientation="horizontal"
+        android:background="@android:color/holo_red_light"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:text="Category"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:layout_weight="0.7"
+            android:background="@android:color/white"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></TextView>
+
+        <ImageButton
+            android:background="@android:color/holo_red_light"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"></ImageButton>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/storylist_listview"
+        android:layout_weight="0.89"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"></ListView>
+
 </LinearLayout>
