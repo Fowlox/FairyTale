@@ -1,6 +1,8 @@
 package com.fairytale;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,8 +21,9 @@ public class StoryLayout extends BaseLayout {
 		public void sceneStart();
 	}
 	
-	Listener listener;
-	View.OnClickListener on_click;
+	private Listener listener;
+	private View.OnClickListener on_click;
+	private Context context;
 	
 	public final static int VISIBLE = View.VISIBLE;
 	public final static int INVISIBLE = View.INVISIBLE;
@@ -29,9 +32,12 @@ public class StoryLayout extends BaseLayout {
 	private ImageButton prev;
 	private ImageButton pause;
 	private ImageView story_scene;
+	private AnimationDrawable ani_drawer;
+	private BitmapDrawable[] bitmaps;
 	
 	public StoryLayout(Context context) {
 		super(context, R.layout.story_main_layout); //intro_main_layout 수정할 것
+		this.context = context;
 		setOnClick();
 		
 		pause = (ImageButton)findViewById(R.id.pause);
@@ -49,9 +55,38 @@ public class StoryLayout extends BaseLayout {
 		this.listener = listener;
 	}
 	
+	public void setAnimationImage(int[] ids){
+		recycleBitmap();
+		bitmaps = new BitmapDrawable[ids.length];
+		ani_drawer = new AnimationDrawable();
+		ani_drawer.setOneShot(false);
+		int duration = 1000;
+		for(int loop = 0; loop < ids.length; loop++){
+			mLog.d("Set Animation Frame: ids="+ids[loop]);
+			bitmaps[loop] = (BitmapDrawable)context.getResources().getDrawable(ids[loop]);
+			ani_drawer.addFrame(bitmaps[loop], duration);
+		}
+		story_scene.setImageDrawable(ani_drawer);
+	}
+	public void startAnimation(){
+		ani_drawer.start();
+	}
+	public void stopAnimation(){
+		ani_drawer.stop();
+	}
+	private void recycleBitmap(){
+		if(bitmaps != null){
+			for(int loop=0;loop<bitmaps.length;loop++)
+				bitmaps[loop].getBitmap().recycle();
+		}
+	}
+	
 	public void setImage(Drawable background){
 		//story_scene.setBackground(background);
 		story_scene.setImageDrawable(background);
+	}
+	public void setImageID(int id){
+		story_scene.setImageResource(id);
 	}
 	
 	public void setBtnVisible(int visible_type){

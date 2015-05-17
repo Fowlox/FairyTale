@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,7 +26,10 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 	
 	private int scene_no;
 	private int images;
+	private int[] image_ids;
 	private boolean is_pause;
+	
+	private float volume;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -33,14 +37,14 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 		database = new DatabaseAccessModel(this);
 		layout = new StoryLayout(this);
 		model = new StoryModel(database, this, 1);
-		model.generateFromDB();
+		//model.generateFromDB();
 		layout.setListener(this);
 		setContentView(layout.getView());
 		
 		story_sound = new MediaPlayer();//Media player 생
 		story_sound.setLooping(false);//반복 설정 해제
 		
-		scene_no = 0;
+		scene_no = 1;
 
 		sceneInit();
 	}
@@ -50,10 +54,20 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 	}
 	
 	public void sceneInit(){
-		images = model.getItem(scene_no).numberOfImage();
+		if(scene_no == 1) images = 1;
+		else images = 2;//model.getItem(scene_no).numberOfImage();
 		//layout.setImage(Converter.bitmapToDrawable(this,model.getItem(scene_no).getImage(0).getImage()));
+		image_ids = new int[images];
+		for(int loop=0;loop<images;loop++){
+			if(scene_no == 1) image_ids[loop] = R.raw.scene01_1;
+			else image_ids[loop] = R.raw.scene02_1+(scene_no-2)*3+loop;
+		}
 		try {
-			story_sound.setDataSource(model.getItem(scene_no).getSound(0).getAudio().toString());
+			//story_sound.setDataSource(model.getItem(scene_no).getSound(0).getAudio().toString());
+			int audio_id;
+			if(scene_no == 1) audio_id = R.raw.scene01;
+			else audio_id = R.raw.scene02+(scene_no-2)*3;
+			story_sound = MediaPlayer.create(getApplicationContext(), audio_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,18 +77,24 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 	
 	public void sceneStart(){
 		is_pause = false;
-		drawer = new ImageDraw();
+		//drawer = new ImageDraw();
+		//drawer.execute();
+		layout.setAnimationImage(image_ids);
+		layout.startAnimation();
 		if(!story_sound.isPlaying()){
-			story_sound.start();
+			//story_sound.start();
+			fadeIn();
 		}
 		//해당신이 끝나면 다음,이전 버튼 보이기
+		
+		fadeOut();
 		story_sound.setOnCompletionListener(new OnCompletionListener() {
 			public void onCompletion(MediaPlayer mp) {
-				drawer.cancel(true);
+				layout.stopAnimation();
 				layout.setBtnVisible(StoryLayout.VISIBLE);
 				if(scene_no == 0)
 					layout.setOneInvisible(0);
-				else if(scene_no == model.numberOfItem()-1)
+				else if(scene_no == 25)
 					layout.setOneInvisible(1);
 			}
 		});
@@ -88,11 +108,56 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 			story_sound.start();
 		}
 	}
+	public void fadeIn(){
+		  volume = 0;
+		  story_sound.setVolume(0, 0);
+		  final Handler h = new Handler();
+		  
+		  h.postDelayed(new Runnable() {
+		    private float time = 0.0f;
+		  @Override
+		  public void run() {
+		    if(!story_sound.isPlaying())
+		      story_sound.start();
+		    time+=100;
+		    story_sound.setVolume(volume, volume);
+		      volume += 0.1;
+		      if(time<=1000){
+		        h.postDelayed(this, 100);
+		      }
+		  }
+		  }, 100);
+		}
+		    
+		public void fadeOut(){
+		  int sec = story_sound.getDuration();
+		  int cur_time=0;
+		  while((sec-cur_time)<1000)
+			 cur_time = story_sound.getCurrentPosition();
+			
+		  volume=1;
+		  final Handler h = new Handler();
+		  
+		  h.postDelayed(new Runnable() {
+		  private float time = 0.0f;
+		  @Override
+		  public void run() {
+		    if(!story_sound.isPlaying())
+		    	story_sound.start();
+		    time+=1000;
+		    story_sound.setVolume(volume, volume);
+		      volume -= 0.1;
+		      if(time<=1000){
+		        h.postDelayed(this, 100);
+		      }
+		  }
+		  }, 100);
+		}
 
 	@Override
 	public void pauseBtnHandler() {
 		//일시정지
-		is_pause = true;
+		layout.stopAnimation();
 		story_sound.pause();
 		//storyPause();
 		
@@ -103,7 +168,7 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 		
 		//재생
 		story_sound.start();
-		is_pause = false;
+		layout.startAnimation();
 	}
 
 	@Override
@@ -148,8 +213,7 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 						publishProgress(0);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
-					}
-					
+					}	
 				}
 				publishProgress(1,current_img_no);
 				
@@ -167,8 +231,14 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 		
 		protected void onProgressUpdate(Integer... progress){
 			if(progress[0] == 0) pause = is_pause; 
-			else if(progress[0] == 1)
-				layout.setImage(Converter.bitmapToDrawable(getApplicationContext(),model.getItem(scene_no).getImage(progress[1]).getImage()));
+			else if(progress[0] == 1){
+				int id;
+				if(scene_no == 1) id = R.raw.scene01_1;
+				else id = R.raw.scene02_1+(scene_no-2)*3+progress[1];
+				mLog.d("progress image change");
+				layout.setImageID(id);
+			}
+				//layout.setImage(Converter.bitmapToDrawable(getApplicationContext(),model.getItem(scene_no).getImage(progress[1]).getImage()));
 		}
 		
 	}
