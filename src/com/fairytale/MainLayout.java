@@ -33,9 +33,9 @@ public class MainLayout extends BaseLayout {
 
 
     private void btnSetting(){
-        ImageButton start_btn = (ImageButton) findViewById(R.id.right_btn);
-        ImageButton describe_btn = (ImageButton) findViewById(R.id.left_btn);
-        ImageButton option_btn = (ImageButton) findViewById(R.id.x_close_btn);
+        ImageButton start_btn = (ImageButton) findViewById(R.id.start_btn);
+        ImageButton describe_btn = (ImageButton) findViewById(R.id.describe_btn);
+        ImageButton option_btn = (ImageButton) findViewById(R.id.option_btn);
 
 //        start_btn.setAlpha((float) 20);
         start_btn.setOnClickListener(on_click);
@@ -55,13 +55,13 @@ public class MainLayout extends BaseLayout {
         on_touch = new View.OnTouchListener(){
             public boolean onTouch(View v, MotionEvent event){
                 ImageButton view = (ImageButton) v;
-//                view.setScaleType(ImageView.ScaleType.CENTER);    //layout_weight�븣臾몄씤吏� view�뱾�씠 ��吏곸씤�떎. (setPadding�쓣 二쇰㈃..) �굹以묒뿉 洹몃깷 洹몃┝ �븯�굹瑜� �뜑 �꽔�뒗寃껋쑝濡� ��泥�
+//                view.setScaleType(ImageView.ScaleType.CENTER);    //layout_weight때문인지 view들이 움직인다. (setPadding을 주면..) 나중에 그냥 그림 하나를 더 넣는것으로 대체
                 if(listener != null){
                     switch (event.getAction()){
                         case MotionEvent.ACTION_DOWN :
 //                            view.setPadding(2, 2, 2, 2);
 //                            view.setCropToPadding(true);
-                            view.setColorFilter(0x55000000);    //Mode �깮�왂
+                            view.setColorFilter(0x55000000);    //Mode 생략
                             break;
 
                         case MotionEvent.ACTION_MOVE:
@@ -86,18 +86,18 @@ public class MainLayout extends BaseLayout {
             public void onClick(View view){
                 if(listener != null){
                     switch (view.getId()){
-                        case R.id.right_btn:
+                        case R.id.start_btn:
 //                            ImageButton start_btn = (ImageButton) findViewById(R.id.start_btn);   OnClick
 //                            start_btn.setImageResource(R.drawable.start_btn_click);
                             listener.Btn1Handler();
 //                            start_btn.setImageResource(R.drawable.start_btn);
                             break;
 
-                        case R.id.left_btn:
+                        case R.id.describe_btn:
                             listener.Btn2Handler();
                             break;
 
-                        case R.id.x_close_btn:
+                        case R.id.option_btn:
                             listener.Btn3Handler();
                             break;
                     }

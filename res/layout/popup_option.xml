@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     android:layout_width="400dp"
     android:layout_height="300dp"
-    android:background="@android:color/white"
+    android:background="@drawable/popup"
     tools:context=".MainOptionPopup">
 
     <ImageButton
@@ -16,6 +16,8 @@
         android:id="@+id/x_close_btn"
         android:background="@drawable/x_close_btn_sel"
         android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
