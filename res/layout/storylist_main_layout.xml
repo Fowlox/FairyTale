@@ -3,34 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/storylist_bg"
     android:orientation="vertical"
     android:weightSum="1"
     tools:context=".StoryListActivity" >
 
     <LinearLayout
-        android:layout_weight="0.11"
-        android:weightSum="1"
-        android:orientation="horizontal"
-        android:background="@android:color/holo_red_light"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="0.11"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
+        android:weightSum="1" >
 
         <TextView
-            android:text="Category"
-            android:textSize="25dp"
-            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="0.7"
             android:background="@android:color/white"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"></TextView>
+            android:gravity="center"
+            android:text="Category"
+            android:textSize="25dp"
+            android:visibility="invisible" >
+</TextView>
 
         <ImageButton
             android:id="@+id/storylist_additional_btn"
-            android:background="@android:color/holo_red_light"
-            android:layout_weight="0.3"
             android:layout_width="0dp"
-            android:layout_height="match_parent"></ImageButton>
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_weight="0.3"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/storylist_add_btn" >
+
+</ImageButton>
     </LinearLayout>
 
     <LinearLayout

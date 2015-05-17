@@ -29,6 +29,15 @@
             android:screenOrientation="landscape">
         </activity>
         <activity 
+            android:name="MainDescribeActivity"
+            android:theme="@android:style/Theme.Dialog"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name="MainOptionPopup"
+            android:theme="@android:style/Theme.Dialog"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity 
             android:name="StoryListActivity"
             android:screenOrientation="landscape">
             

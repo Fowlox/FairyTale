@@ -31,6 +31,8 @@ public class StoryListLayout extends BaseLayout {
 		
 		additionalBtn = (ImageButton)findViewById(R.id.storylist_additional_btn);
 		storys = (LinearLayout)findViewById(R.id.storylist_listview); 
+		
+		additionalBtn.setOnClickListener(on_click);
 	}
 	
 	public void setListener(Listener listener){
@@ -51,7 +53,8 @@ public class StoryListLayout extends BaseLayout {
 			
 			final int id = ids[story_loop];
 			ImageButton thumb = ((ImageButton) plate.findViewById(R.id.storylist_thumb1+(2*story_loop)));
-			thumb.setImageBitmap(model.getThumb(id));
+			//thumb.setImageBitmap(model.getThumb(id));
+			thumb.setImageResource(model.getThumbID(id));
 			thumb.setOnClickListener(new OnClickListener(){
 				public void onClick(View v) {
 					listener.startStory(id);

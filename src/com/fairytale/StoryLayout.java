@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class StoryLayout extends BaseLayout {
@@ -24,18 +25,18 @@ public class StoryLayout extends BaseLayout {
 	public final static int VISIBLE = View.VISIBLE;
 	public final static int INVISIBLE = View.INVISIBLE;
 	
-	private Button next;
-	private Button prev;
-	private Button pause;
+	private ImageButton next;
+	private ImageButton prev;
+	private ImageButton pause;
 	private ImageView story_scene;
 	
 	public StoryLayout(Context context) {
 		super(context, R.layout.story_main_layout); //intro_main_layout 수정할 것
 		setOnClick();
 		
-		pause = (Button)findViewById(R.id.pause);
-		next = (Button)findViewById(R.id.next);
-		prev = (Button)findViewById(R.id.prev);
+		pause = (ImageButton)findViewById(R.id.pause);
+		next = (ImageButton)findViewById(R.id.next);
+		prev = (ImageButton)findViewById(R.id.prev);
 		
 		story_scene = (ImageView)findViewById(R.id.ws_scene);
 		

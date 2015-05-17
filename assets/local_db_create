@@ -5,4 +5,4 @@ CREATE TABLE sound (story_id INTEGER, item_id INTEGER, sound BLOB, PRIMARY KEY(s
 CREATE TABLE text (story_id INTEGER, item_id INTEGER, text_num INTEGER, text TEXT, text_time INTEGER, PRIMARY KEY(story_id,item_id,text_num), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
 CREATE TABLE bgm (story_id INTEGER, item_id INTEGER, bgm BLOB, PRIMARY KEY(story_id,item_id), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
 CREATE TABLE dataversion (key TEXT, value INTEGER,PRIMARY KEY(key));
-INSERT INTO dataversion(key, value) VALUES('version',0)
+INSERT INTO dataversion(key, value) VALUES('version',0);

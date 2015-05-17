@@ -46,13 +46,21 @@ public class StoryListModel {
 				img = BitmapFactory.decodeByteArray(blob, 0, blob.length);
 			thumbs.put(id, img);
 		}
+		storys.add(1);
+		titles.put(1, "북풍과 태양");
+		
 	}
 	
 	public Integer[] getIDs(){
-		return (Integer[])storys.toArray();
+		Integer[] data = new Integer[storys.size()];
+		for(int loop = 0; loop<data.length; loop++) data[loop] = storys.get(loop);
+		return data;
 	}
 	public Bitmap getThumb(int num){
 		return thumbs.get(num);
+	}
+	public int getThumbID(int num){
+		return R.raw.thumb;
 	}
 	public String getTitle(int num){
 		return titles.get(num);

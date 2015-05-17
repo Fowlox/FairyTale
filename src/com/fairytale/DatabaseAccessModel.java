@@ -193,7 +193,7 @@ public class DatabaseAccessModel {
 			// TODO Auto-generated method stub
 			String query = null;
 			try{
-				AssetManager asset_mgr = context.getAssets();
+				AssetManager asset_mgr = context.getApplicationContext().getAssets();
 				InputStream is = asset_mgr.open("local_db_create");
 				BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 				

@@ -3,6 +3,8 @@ package com.fairytale;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.widget.Toast;
 
 public class StoryListActivity extends Activity implements StoryListLayout.Listener {
 	private DatabaseAccessModel dba;
@@ -26,7 +28,10 @@ public class StoryListActivity extends Activity implements StoryListLayout.Liste
 	@Override
 	public void goAdditionalStory() {
 		mLog.i("Change to Additional Story Activity");
-		startActivity(new Intent(StoryListActivity.this, AdditionalStoryListActivity.class));
+		//startActivity(new Intent(StoryListActivity.this, AdditionalStoryListActivity.class));
+		Toast toast = Toast.makeText(getApplicationContext(), "베타 버전에서는 제공되지 않습니다.", Toast.LENGTH_LONG);
+		toast.setGravity(Gravity.CENTER,0,0);
+		toast.show();
 	}
 
 	@Override

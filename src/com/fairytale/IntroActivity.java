@@ -1,6 +1,7 @@
 package com.fairytale;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,9 +11,11 @@ import java.io.OutputStream;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -44,8 +47,13 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 		setContentView(layout.getView());
 
 		mLog.d("Test Intro Activity Execution");
-		
-		new LoadingJob(this).execute();
+//		try {
+//			fillDatabase();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		changeToMain();
+		//new LoadingJob(this).execute();
 		
 	}
 	
@@ -83,6 +91,97 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 		debuging_point = false;
 	}
 	
+	private void fillDatabase() throws Exception{
+		if(dba.getInt("STORY_ID", "STORY", new String[]{"STORY_ID"}, new String[]{"1"}) == -1){
+			//set data
+			//HashMap<Integer,HashMap<Integer,Integer[]>> info = new HashMap<Integer,HashMap<Integer,Integer[]>>();
+			//HashMap<Integer,Integer[]> item_map = new HashMap<Integer,Integer[]>();
+			mLog.i("Start getUpdateInfo");
+			mLog.d("get information of story_id:"+1);
+			int story_id = 1;
+			
+			//AssetManager ast_mgr = this.getResources().getAssets();
+			//InputStream is = getResources().openRawResource(R.raw.info);
+			//InputStream is = this.getResources().openRawResource(R.raw.info);
+			//InputStreamReader isr = new InputStreamReader(is,"utf-8");
+			//BufferedReader reader1 = new BufferedReader(isr);
+			
+			//String[] tdatas = reader1.readLine().split(",");
+			String[]tdatas = new String[]{"북풍과 태양","25"};
+			//AssetManager tast_mgr = this.getResources().getAssets();
+			InputStream tis = this.getResources().openRawResource(R.raw.thumb);
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			Converter.drawableToBitmap(Drawable.createFromStream(tis, null)).compress(Bitmap.CompressFormat.PNG, 100, stream);
+			byte[] blob_thumb = stream.toByteArray();
+			
+			ContentValues table_recoder = new ContentValues();
+			table_recoder.put("story_id", story_id);
+			table_recoder.put("story_title", tdatas[0]);
+			table_recoder.put("story_thumb", blob_thumb);
+			dba.insertContentValue("story", table_recoder);
+			mLog.d("sroty info -> title:"+tdatas[0]+", number of scene:"+tdatas[1]);
+			table_recoder.clear();
+			stream.close();
+			tis.close();
+			//tast_mgr.close();
+			
+			for(int item_id=1; item_id<=Integer.parseInt(tdatas[1]); item_id++){
+				String[] idatas;
+				if(item_id == 1) idatas = new String[]{"story","1","1","0","0"};
+				else idatas = new String[]{"story","2","1","0","0"};
+				
+				ContentValues item_recoder = new ContentValues();
+				item_recoder.put("story_id", story_id);
+				item_recoder.put("item_id", item_id);
+				item_recoder.put("item_type", idatas[0]);
+				dba.insertContentValue("item", item_recoder);
+				item_recoder.clear();
+				mLog.d("scene info -> type:"+idatas[0]+", num_img:"+idatas[1]+", num_sound:"+idatas[2]+", num_bgm:"+idatas[3]+", num_txt:"+idatas[4]);
+				for(int image_id=1; image_id<=Integer.parseInt(idatas[1]); image_id++){
+					//AssetManager iast_mgr = this.getResources().getAssets();
+					InputStream iis = this.getResources().openRawResource(model.getImageResource(item_id, image_id));
+					ByteArrayOutputStream istream = new ByteArrayOutputStream();
+					Converter.drawableToBitmap(Drawable.createFromStream(iis, null)).compress(Bitmap.CompressFormat.PNG, 100, istream);
+					byte[] image_blob = istream.toByteArray();
+					
+					ContentValues image_recoder = new ContentValues();
+					image_recoder.put("story_id", story_id);
+					image_recoder.put("item_id", item_id);
+					image_recoder.put("image_num", image_id);
+					image_recoder.put("image", image_blob);
+					dba.insertContentValue("image", image_recoder);
+					image_recoder.clear();
+					istream.close();
+					iis.close();
+					//iast_mgr.close();
+				}
+				//AssetManager sast_mgr = this.getResources().getAssets();
+				InputStream sis = this.getResources().openRawResource(model.getSoundResource(item_id));
+				ByteArrayOutputStream sstream = new ByteArrayOutputStream();
+				Converter.drawableToBitmap(Drawable.createFromStream(sis, null)).compress(Bitmap.CompressFormat.PNG, 100, sstream);
+				byte[] sound_blob = sstream.toByteArray();
+				
+				ContentValues sound_recoder = new ContentValues();
+				sound_recoder.put("story_id", story_id);
+				sound_recoder.put("item_id", item_id);
+				sound_recoder.put("sound", sound_blob);
+				dba.insertContentValue("sound", sound_recoder);
+				sound_recoder.clear();
+				sstream.close();
+				sis.close();
+				//sast_mgr.close();
+			}
+			//reader1.close();
+			//isr.close();
+			//is.close();
+//			ast_mgr.close();
+		}
+		mLog.d("db:story----------\n"+dba.selectQuery("story", new String[]{"story_id","story_title"}, null, null, null, null, null).toString());
+		mLog.d("db:item----------\n"+dba.selectQuery("item", new String[]{"story_id","item_id","item_type"}, null, null, null, null, null).toString());
+		mLog.d("db:image----------\n"+dba.selectQuery("image", new String[]{"story_id","item_id","image_num"}, null, null, null, null, null).toString());
+		mLog.d("db:sound----------\n"+dba.selectQuery("sound", new String[]{"story_id","item_id"}, null, null, null, null, null).toString());
+	}
+	
 	//비동기 작업을 위한 내부 클래스
 	private class LoadingJob extends AsyncTask<Void, Integer, Boolean>{
 		//플래그 상수
@@ -94,12 +193,11 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 		private boolean status;
 		
 		private Context context;
-		private AssetManager asset_mgr;
 		private InputStream ais;
+		private int result;
 		
 		public LoadingJob(Context context){
 			this.context = context;
-			asset_mgr = context.getAssets();
 			ais = null;
 		}
 		@Override
@@ -135,7 +233,7 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 			}
 			status = true;
 			publishProgress(DEBUGING,0);
-			getUpdateInfo();
+			//getUpdateInfo();
 			while(status){
 				try{
 					publishProgress(DEBUGING,1);
@@ -146,11 +244,11 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 			publishProgress(DEBUGING,0);
 			//서버와 디바이스간 비교
 			publishProgress(UPDATE_CHECK);
-			try {
-				getDataFromServer();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+//			try {
+//				getDataFromServer();
+//			} catch (Exception e1) {
+//				e1.printStackTrace();
+//			}
 			while(status){
 				try{
 					publishProgress(DEBUGING,1);
@@ -206,6 +304,8 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				}else if(progress[1] == 4){
+					result = dba.getInt("STORY_ID", "STORY", new String[]{"STORY_ID"}, new String[]{""+progress[2]});
 				}
 				asset_mgr.close();
 			}
@@ -259,7 +359,9 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 			Integer[] ids = model.storyUpdateList();
 			InputStream is;
 			for(int update_loop = 0; update_loop<ids.length; update_loop++){
-				if(dba.getInt("STORY_ID", "STORY", new String[]{"STORY_ID"}, new String[]{""+ids[update_loop]}) == -1){
+				publishProgress(UPDATE_PROGRESS,4,ids[update_loop]);
+//				if(dba.getInt("STORY_ID", "STORY", new String[]{"STORY_ID"}, new String[]{""+ids[update_loop]}) == -1){
+				if(result == -1){
 					int s_id = ids[update_loop];
 					publishProgress(UPDATE_PROGRESS,0,1);
 //					BufferedReader reader = new BufferedReader(new InputStreamReader(asset_mgr.open("story_"+1+"/info.story")));
