@@ -19,11 +19,11 @@
             android:name=".IntroActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
-            <intent-filter>
+<!--           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter> -->  
         </activity>
         <activity
             android:name=".MainActivity"
@@ -45,6 +45,11 @@
             android:name=".GamePuzzleActivity"
             android:label="@string/title_activity_game_puzzle" 
             android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
