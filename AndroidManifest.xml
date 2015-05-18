@@ -25,29 +25,33 @@
             </intent-filter>
         </activity>
         <activity 
-            android:name="MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="landscape">
         </activity>
         <activity 
-            android:name="MainDescribeActivity"
+            android:name=".MainDescribeActivity"
             android:theme="@android:style/Theme.Dialog"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name="MainOptionPopup"
+        <activity android:name=".MainOptionPopup"
             android:theme="@android:style/Theme.Dialog"
             android:screenOrientation="landscape">
         </activity>
         <activity 
-            android:name="StoryListActivity"
+            android:name=".StoryListActivity"
             android:screenOrientation="landscape">
             
         </activity>
         <activity 
-            android:name="AdditionalStoryListActivity"
+            android:name=".AdditionalStoryListActivity"
             android:screenOrientation="landscape">
         </activity>
         <activity 
-            android:name="StoryActivity"
+            android:name=".StoryActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".GamePuzzleActivity"
             android:screenOrientation="landscape">
         </activity>
     </application>

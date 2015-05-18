@@ -74,21 +74,18 @@ public class MainActivity extends Activity implements MainLayout.LayoutListener 
 
     @Override
     public void Btn2Handler() {
-//        Intent howToPopup = new Intent(this, MainDescribePopup.class);
+    	main_layout.setBackground(true);
         Intent howToPopup = new Intent(this, MainDescribeActivity.class);
         startActivity(howToPopup);
-
-//        View popupView = View.inflate(this, R.layout.popup_describe, null);
-//        PopupWindow popup = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-//        popup.showAtLocation((RelativeLayout)findViewById(R.id.mainLayout), Gravity.CENTER, 0, 0);
+        main_layout.setBackground(false);
     }
 
     @Override
     public void Btn3Handler() {
-//        MainOptionPopup optionPop = new MainOptionPopup();
-
+    	main_layout.setBackground(true);
         Intent optionPopup = new Intent(this, MainOptionPopup.class);
         startActivity(optionPopup);
+        main_layout.setBackground(false);
     }
 
     public MediaPlayer getMediaPlayer(){

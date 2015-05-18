@@ -56,9 +56,9 @@ public class IntroLoadingModel {
 	
 	public int getImageResource(int item_no, int img_no){
 		if(item_no == 1){
-			return R.raw.scene01_1;
+			return R.drawable.scene01_1;
 		}else{
-			return R.raw.scene02_1+(item_no-2)*3+img_no-1;
+			return R.drawable.scene02_1+(item_no-2)*2+img_no-1;
 		}
 	}
 	public int getSoundResource(int item_no){

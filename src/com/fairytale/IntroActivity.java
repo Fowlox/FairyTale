@@ -109,7 +109,7 @@ public class IntroActivity extends Activity implements IntroLayout.Listener{
 			//String[] tdatas = reader1.readLine().split(",");
 			String[]tdatas = new String[]{"북풍과 태양","25"};
 			//AssetManager tast_mgr = this.getResources().getAssets();
-			InputStream tis = this.getResources().openRawResource(R.raw.thumb);
+			InputStream tis = this.getResources().openRawResource(R.drawable.thumb);
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			Converter.drawableToBitmap(Drawable.createFromStream(tis, null)).compress(Bitmap.CompressFormat.PNG, 100, stream);
 			byte[] blob_thumb = stream.toByteArray();

@@ -60,7 +60,7 @@ public class StoryListModel {
 		return thumbs.get(num);
 	}
 	public int getThumbID(int num){
-		return R.raw.thumb;
+		return R.drawable.thumb;
 	}
 	public String getTitle(int num){
 		return titles.get(num);

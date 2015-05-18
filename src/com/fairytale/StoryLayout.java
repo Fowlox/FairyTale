@@ -74,11 +74,15 @@ public class StoryLayout extends BaseLayout {
 	public void stopAnimation(){
 		ani_drawer.stop();
 	}
-	private void recycleBitmap(){
+	public void recycleBitmap(){
 		if(bitmaps != null){
 			for(int loop=0;loop<bitmaps.length;loop++)
 				bitmaps[loop].getBitmap().recycle();
 		}
+	}
+	public boolean isBitmapNull(){
+		if(bitmaps == null) return true;
+		else return false;
 	}
 	
 	public void setImage(Drawable background){
