@@ -70,6 +70,7 @@ public class MainActivity extends Activity implements MainLayout.LayoutListener 
     public void Btn1Handler() {
         Intent storyListAct = new Intent(this, StoryListActivity.class);
         startActivity(storyListAct);
+        System.gc();
     }
 
     @Override
@@ -77,6 +78,7 @@ public class MainActivity extends Activity implements MainLayout.LayoutListener 
     	main_layout.setBackground(true);
         Intent howToPopup = new Intent(this, MainDescribeActivity.class);
         startActivity(howToPopup);
+        System.gc();
         main_layout.setBackground(false);
     }
 
@@ -85,6 +87,7 @@ public class MainActivity extends Activity implements MainLayout.LayoutListener 
     	main_layout.setBackground(true);
         Intent optionPopup = new Intent(this, MainOptionPopup.class);
         startActivity(optionPopup);
+        System.gc();
         main_layout.setBackground(false);
     }
 

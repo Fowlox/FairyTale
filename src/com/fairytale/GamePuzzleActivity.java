@@ -15,8 +15,8 @@ public class GamePuzzleActivity extends Activity {
 	//LinearLayout puzzle1,puzzle2,puzzle3,puzzle4,puzzle5,puzzle6;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.i("tag","Message1");
 		super.onCreate(savedInstanceState);
+		System.gc();
 		Log.i("tag","Message2");
 		setContentView(R.layout.activity_game_puzzle);
 		Log.i("tag","Message3");

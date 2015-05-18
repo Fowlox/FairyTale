@@ -39,5 +39,8 @@ public class StoryListActivity extends Activity implements StoryListLayout.Liste
 		Intent intent = new Intent(getApplicationContext(), StoryActivity.class);
 		intent.putExtra(StoryActivity.STORY_ID,story_id);
 		startActivity(intent);
+		System.gc();
+//		Intent puzzleGameAct = new Intent(this, GamePuzzleActivity.class);
+//        startActivity(puzzleGameAct);
 	}
 }

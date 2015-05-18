@@ -75,14 +75,15 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 		layout.setAnimationImage(image_ids);
 		layout.startAnimation();
 		if(!story_sound.isPlaying()){
-			//story_sound.start();
-			fadeIn();
+			story_sound.start();
+			//fadeIn();
 		}
 		//해당신이 끝나면 다음,이전 버튼 보이기
 		
-		fadeOut();
+		//fadeOut();
 		story_sound.setOnCompletionListener(new OnCompletionListener() {
 			public void onCompletion(MediaPlayer mp) {
+				story_sound.release();
 				layout.stopAnimation();
 //				layout.setBtnVisible(StoryLayout.VISIBLE);
 //				if(scene_no == 1)
@@ -154,9 +155,6 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 		story_sound.pause();
 		//storyPause();
 		
-//		Intent optionPopup = new Intent(this, MainOptionPopup.class);
-//        startActivity(optionPopup);
-		
 		//일시적으로 토스트 이부분을 팝업뷰로 변경
 		Toast toast = Toast.makeText(getApplicationContext(), "베타 버전에서는 지원하지 않습니다.", Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -169,12 +167,7 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 
 	@Override
 	public void preBtnHandler() {
-		layout.recycleBitmap();
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		story_sound.release();
 		scene_no--;
 		//layout.setBtnVisible(StoryLayout.INVISIBLE);
 		sceneInit();
@@ -183,16 +176,12 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 	@Override
 	public void nextBtnHandler() {
 		// TODO Auto-generated method stub
-		layout.recycleBitmap();	
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		story_sound.release();
 		if(scene_no == 12){
 			
 		}
 		if(scene_no == 25){
+			layout.recycleBitmap();
 			Intent puzzleGameAct = new Intent(this, GamePuzzleActivity.class);
 	        startActivity(puzzleGameAct);
 			finish();
