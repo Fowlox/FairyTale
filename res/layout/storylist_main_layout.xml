@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/storylist_bg"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".StoryListActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.11"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:text="Category"
+            android:textSize="25dp"
+            android:visibility="invisible" >
+</TextView>
+
+        <ImageButton
+            android:id="@+id/storylist_additional_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_weight="0.3"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/storylist_add_btn" >
+
+</ImageButton>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/storylist_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.89"
+        android:orientation="vertical" >
+        
+    </LinearLayout>
+
+</LinearLayout>

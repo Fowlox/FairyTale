@@ -1,0 +1,26 @@
+북풍과 태양,25
+story,1,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0
+story,2,1,0,0

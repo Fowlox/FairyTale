@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:splitMotionEvents="false">
 
     <LinearLayout
         android:id="@+id/puzzle_outLayout1"
@@ -35,21 +36,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:background="@color/puzzle_background_color_2"
                 android:gravity="center_horizontal|bottom"
                 android:orientation="horizontal" >
 
                 <LinearLayout
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:background="@color/White"
                     android:orientation="vertical" >
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@color/White"
                     android:gravity="center_horizontal|bottom" >
 
                     <LinearLayout
@@ -80,7 +78,6 @@
                 <LinearLayout
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:background="@color/White"
                     android:orientation="vertical" >
                 </LinearLayout>
             </LinearLayout>
@@ -90,21 +87,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:background="@color/puzzle_background_color_2"
                 android:gravity="center_horizontal|top"
                 android:orientation="horizontal" >
 
                 <LinearLayout
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:background="@color/White"
                     android:orientation="vertical" >
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@color/White" >
+                    android:layout_height="match_parent" >
 
                     <LinearLayout
                         android:id="@+id/puzzle_4"
@@ -134,7 +128,6 @@
                 <LinearLayout
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:background="@color/White"
                     android:orientation="vertical" >
                 </LinearLayout>
             </LinearLayout>
@@ -160,7 +153,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/puzzle_background_color"
         android:orientation="horizontal" >
 
         <LinearLayout

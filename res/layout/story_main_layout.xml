@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
+
+  <ImageView
+      android:id="@+id/ws_scene"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="fitXY" >
+
+<!--         <ImageView 
+            android:id="@+id/ws_scene"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:src="@drawable/ws1_1"
+            /> -->
+    </ImageView>
+    <LinearLayout 
+        android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="108" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1792" >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="108" >
+
+	            <ImageButton
+	                android:id="@+id/pause"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:background="@android:color/transparent"
+	                android:scaleType="centerInside"
+	                android:src="@drawable/gen_btn_pause" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20" >
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="862" >
+</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="110"
+            android:orientation="horizontal" >
+
+		    <LinearLayout
+		        android:layout_width="0dp"
+		        android:layout_height="match_parent"
+		        android:layout_weight="144" >
+
+			    <ImageButton
+			        android:id="@+id/prev"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"
+			        android:background="@android:color/transparent"
+			        android:scaleType="centerInside"
+			        android:src="@drawable/left_pointer"
+			        android:visibility="invisible" />
+     
+		    </LinearLayout>
+
+		    <LinearLayout
+		        android:layout_width="0dp"
+		        android:layout_height="match_parent"
+		        android:layout_weight="1632" >
+
+		    </LinearLayout>
+
+		  	<LinearLayout
+		  	    android:layout_width="0dp"
+		  	    android:layout_height="match_parent"
+		  	    android:layout_weight="144" >
+
+			    <ImageButton
+			        android:id="@+id/next"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"
+			        android:background="@android:color/transparent"
+			        android:scaleType="centerInside"
+			        android:src="@drawable/right_pointer"
+			        android:visibility="invisible" />
+     
+		    </LinearLayout>
+	    </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

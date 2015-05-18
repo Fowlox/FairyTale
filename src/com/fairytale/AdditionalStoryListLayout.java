@@ -13,7 +13,7 @@ public class AdditionalStoryListLayout extends BaseLayout {
 	View.OnClickListener on_click;
 	
 	public AdditionalStoryListLayout(Context context) {
-		super(context, R.layout.intro_main_layout); //intro_main_layout 수정할 것
+		super(context, R.layout.intro_main_layout); //intro_main_layout �닔�젙�븷 寃�
 		setOnClick();
 	}
 	

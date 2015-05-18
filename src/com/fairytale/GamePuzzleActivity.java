@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 
 public class GamePuzzleActivity extends Activity {
 
+	private boolean touch_flag = false; 
+
 	//LinearLayout puzzle1,puzzle2,puzzle3,puzzle4,puzzle5,puzzle6;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +22,14 @@ public class GamePuzzleActivity extends Activity {
 		Log.i("tag","Message2");
 		setContentView(R.layout.activity_game_puzzle);
 		Log.i("tag","Message3");
-		
+
 		findViewById(R.id.puzzle_imageView1).setOnTouchListener(mTouchListener);
 		findViewById(R.id.puzzle_imageView2).setOnTouchListener(mTouchListener);
 		findViewById(R.id.puzzle_imageView3).setOnTouchListener(mTouchListener);
 		findViewById(R.id.puzzle_imageView4).setOnTouchListener(mTouchListener);
 		findViewById(R.id.puzzle_imageView5).setOnTouchListener(mTouchListener);
 		findViewById(R.id.puzzle_imageView6).setOnTouchListener(mTouchListener);
-		
+
 		findViewById(R.id.puzzle_1).setOnDragListener(mDragListener);
 		findViewById(R.id.puzzle_2).setOnDragListener(mDragListener);
 		findViewById(R.id.puzzle_3).setOnDragListener(mDragListener);
@@ -41,15 +43,29 @@ public class GamePuzzleActivity extends Activity {
 	View.OnTouchListener mTouchListener = new View.OnTouchListener(){
 		@Override
 		public boolean onTouch(View view, MotionEvent event) {
-			if (event.getAction() == MotionEvent.ACTION_DOWN){
-				ClipData clip = ClipData.newPlainText("", "");
-				view.startDrag(clip, new CanvasShadow(view,(int)event.getX(),(int)event.getY()),view,0);
-				view.setVisibility(View.INVISIBLE);
-				return true;
+			if(event.getPointerCount()==1){
+				switch(event.getAction() & MotionEvent.ACTION_MASK){
+				case MotionEvent.ACTION_DOWN:
+					ClipData clip = ClipData.newPlainText("", "");
+					mLog.d("clip : "+clip.getItemCount() +"//");
+					if(touch_flag==false){
+						touch_flag=true;
+						view.startDrag(clip, new CanvasShadow(view,(int)event.getX(),(int)event.getY()),view,0);
+						view.setVisibility(View.INVISIBLE);
+					}
+					return touch_flag;
+				}
 			}
-			return false;
-		}		
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return touch_flag=false;
+		}
 	};
+
 
 	View.OnDragListener mDragListener = new View.OnDragListener(){
 		public boolean onDrag(View v, DragEvent event){
