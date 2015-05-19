@@ -5,6 +5,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class ShakeLayout extends BaseLayout{
 
@@ -12,12 +13,8 @@ public class ShakeLayout extends BaseLayout{
 	private AnimationDrawable ani_drawer;
 	private BitmapDrawable[] bitmaps;
 	private ImageView shake_scene;
-	private ImageView zero_sun;
-	private ImageView first_sun;
-	private ImageView second_sun;
-	private ImageView third_sun;
-	private ImageView fourth_sun;
-	private ImageView fivth_sun;
+	private LinearLayout left_blank;
+	private LinearLayout right_blank;
 	
 	protected ShakeLayout(Context context ) {
 		super(context, R.layout.activity_shake); //intro_main_layout 수정할 것
@@ -25,12 +22,8 @@ public class ShakeLayout extends BaseLayout{
 		setOnClick();
 		
 		shake_scene = (ImageView)findViewById(R.id.ws_scene);
-		zero_sun = (ImageView)findViewById(R.id.zero_sun);
-		first_sun = (ImageView)findViewById(R.id.first_sun);
-		second_sun = (ImageView)findViewById(R.id.second_sun);
-		third_sun = (ImageView)findViewById(R.id.third_sun);
-		fourth_sun = (ImageView)findViewById(R.id.fourth_sun);
-		fivth_sun = (ImageView)findViewById(R.id.fivth_sun);
+		left_blank = (LinearLayout)findViewById(R.id.left_blank);
+		right_blank = (LinearLayout)findViewById(R.id.right_blank);
 	}
 	
 	public void setAnimationImage(int[] ids){
@@ -63,28 +56,15 @@ public class ShakeLayout extends BaseLayout{
 	}
 	
 	public void progressBurn(int progress){
-		switch (progress){
-		case 20:
-			zero_sun.setVisibility(View.INVISIBLE);
-			first_sun.setVisibility(View.VISIBLE);
-			break;
-		case 40:
-			first_sun.setVisibility(View.INVISIBLE);
-			second_sun.setVisibility(View.VISIBLE);
-			break;
-		case 60:
-			second_sun.setVisibility(View.INVISIBLE);
-			third_sun.setVisibility(View.VISIBLE);
-			break;
-		case 80:
-			third_sun.setVisibility(View.INVISIBLE);
-			fourth_sun.setVisibility(View.VISIBLE);
-			break;
-		case 100:
-			fourth_sun.setVisibility(View.INVISIBLE);
-			fivth_sun.setVisibility(View.VISIBLE);
-			break;
-		}
+		
+		LinearLayout.LayoutParams lparam = (LinearLayout.LayoutParams) left_blank.getLayoutParams();
+		LinearLayout.LayoutParams rparam = (LinearLayout.LayoutParams) right_blank.getLayoutParams();
+		
+		lparam.weight = progress;
+		rparam.weight = 100-progress;
+		
+		left_blank.setLayoutParams(lparam);
+		right_blank.setLayoutParams(rparam);
 		
 	}
 	
