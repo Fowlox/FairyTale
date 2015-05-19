@@ -30,14 +30,16 @@ public class MainLayout extends BaseLayout {
     public void setListener(LayoutListener listener){
         this.listener = listener;
     }
-
+    public void setBackground(boolean is_under){
+    	if(is_under)getView().setBackgroundResource(R.drawable.pause_background);
+    	else getView().setBackgroundResource(R.drawable.background);
+    }
 
     private void btnSetting(){
         ImageButton start_btn = (ImageButton) findViewById(R.id.start_btn);
         ImageButton describe_btn = (ImageButton) findViewById(R.id.describe_btn);
         ImageButton option_btn = (ImageButton) findViewById(R.id.option_btn);
 
-//        start_btn.setAlpha((float) 20);
         start_btn.setOnClickListener(on_click);
         start_btn.setOnTouchListener(on_touch);
 
@@ -48,8 +50,8 @@ public class MainLayout extends BaseLayout {
         option_btn.setOnTouchListener(on_touch);
     }
 
-    public void viewDetail(){
-    }
+//    public void viewDetail(){
+//    }
 
     private void setOnTouch(){
         on_touch = new View.OnTouchListener(){

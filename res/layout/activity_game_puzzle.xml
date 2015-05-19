@@ -1,0 +1,173 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="380"
+        android:background="@drawable/puzzle_bg_left"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:splitMotionEvents="false" >
+
+        <ImageView
+            android:id="@+id/puzzle_imageView1"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/puzzle_1" />
+
+        <ImageView
+            android:id="@+id/puzzle_imageView2"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/puzzle_6" />
+
+        <ImageView
+            android:id="@+id/puzzle_imageView3"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/puzzle_4" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1160"
+        android:background="@drawable/puzzle_bg_center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:gravity="center"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/puzzle_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/puzzle_title_bg"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColorHint="@color/White"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:gravity="center" >
+
+            <LinearLayout
+                android:id="@+id/puzzle_1"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/puzzle_1_background"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/puzzle_2"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/puzzle_2_background"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/puzzle_3"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/puzzle_3_background"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:gravity="center" >
+
+            <LinearLayout
+                android:id="@+id/puzzle_4"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/puzzle_4_background"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/puzzle_5"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/puzzle_5_background"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/puzzle_6"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/puzzle_6_background"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="61dp" >
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="380"
+        android:background="@drawable/puzzle_bg_right"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/puzzle_imageView4"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/puzzle_2" />
+
+        <ImageView
+            android:id="@+id/puzzle_imageView5"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/puzzle_5" />
+
+        <ImageView
+            android:id="@+id/puzzle_imageView6"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/puzzle_3" />
+
+    </LinearLayout>
+
+</LinearLayout>

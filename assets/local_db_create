@@ -1,0 +1,8 @@
+CREATE TABLE story (story_id INTEGER, story_title TEXT, story_thumb BLOB, PRIMARY KEY(story_id));
+CREATE TABLE item (story_id INTEGER, item_id INTEGER, item_type INTEGER, PRIMARY KEY(story_id,item_id), FOREIGN KEY(story_id) REFERENCES story(story_id));
+CREATE TABLE image (story_id INTEGER, item_id INTEGER, image_num INTEGER, image BLOB, PRIMARY KEY(story_id,item_id,image_num), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
+CREATE TABLE sound (story_id INTEGER, item_id INTEGER, sound BLOB, PRIMARY KEY(story_id,item_id), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
+CREATE TABLE text (story_id INTEGER, item_id INTEGER, text_num INTEGER, text TEXT, text_time INTEGER, PRIMARY KEY(story_id,item_id,text_num), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
+CREATE TABLE bgm (story_id INTEGER, item_id INTEGER, bgm BLOB, PRIMARY KEY(story_id,item_id), FOREIGN KEY(story_id) REFERENCES item(story_id), FOREIGN KEY(item_id) REFERENCES item(item_id));
+CREATE TABLE dataversion (key TEXT, value INTEGER,PRIMARY KEY(key));
+INSERT INTO dataversion(key, value) VALUES('version',0);

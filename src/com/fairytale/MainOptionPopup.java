@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -37,23 +38,23 @@ public class MainOptionPopup extends Activity {
     public void onClick(View view){
         if(view.getId() == R.id.bgm_switch) {
             if (BGM_SWITCH_ON) {
-                view.setBackgroundResource(R.drawable.bgm_switch_off);
+                view.setBackgroundResource(R.drawable.switch_off);
 //                AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 //                audioManager.setStreamMute(AudioManager.STREAM_MUSIC, true);
                 BGM_SWITCH_ON = false;
             }
             else {
-                view.setBackgroundResource(R.drawable.bgm_switch_on);
+                view.setBackgroundResource(R.drawable.switch_on);
                 BGM_SWITCH_ON = true;
             }
         }
         else if(view.getId() == R.id.narr_switch) {
             if (NARR_SWITCH_ON) {
-                view.setBackgroundResource(R.drawable.narr_switch_off);
+                view.setBackgroundResource(R.drawable.switch_off);
                 NARR_SWITCH_ON = false;
             }
             else {
-                view.setBackgroundResource(R.drawable.narr_switch_on);
+                view.setBackgroundResource(R.drawable.switch_on);
                 NARR_SWITCH_ON = true;
             }
         }

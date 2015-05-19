@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+  <!-- <item android:id="@+android:id/background" >
+	<shape>
+		<corners android:radius="10dip"/>
+		<gradient
+			android:startColor="#ff9d9e9d"
+			android:centerColor="#ff5a5d5a"
+			android:centerY="0.75"
+			android:endColor="#ff747674"
+			android:angle="270" />
+	</shape>
+  </item>
+  <item android:id="@+android:id/secondaryProgress">
+	<shape>
+		<corners android:radius="10dip"/>
+		<gradient
+			android:startColor="#80ffd300"
+			android:centerColor="#80ffb600"
+			android:centerY="0.75"
+			android:endColor="#a0ffcb00"
+			android:angle="270" />
+	</shape>
+  </item>
+  <item android:id="@+android:id/progress">
+	<shape>
+		<corners android:radius="10dip"/>
+		<gradient
+			android:startColor="#ff0000"
+			android:centerColor="#00ff00"
+			android:centerY="0.75"
+			android:endColor="#0000ff"
+			android:angle="0" /> 
+		<padding android:left="10dp" android:top="10dp"         
+			android:right="10dp" android:bottom="10dp" /> 
+	</shape>
+  </item> -->
+  <item android:id="@+android:id/background" >
+      <bitmap android:src="@drawable/intro_progress_bg" android:gravity="center"/>
+      <scale android:scaleHeight="100%" android:scaleWidth="100%" />
+  </item>
+  <item android:id="@+android:id/secondaryProgress">
+      <bitmap android:src="@drawable/intro_progress" android:gravity="center"/>
+  </item>
+  <item android:id="@+android:id/progress">
+      <bitmap android:src="@drawable/intro_progress" android:gravity="center"/>
+  </item>
+</layer-list>

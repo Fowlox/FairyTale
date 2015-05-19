@@ -2,93 +2,150 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/optionPopup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:layout_gravity="center"
-    android:layout_width="400dp"
-    android:layout_height="300dp"
-    android:background="@drawable/popup"
-    tools:context=".MainOptionPopup">
+    tools:context=".MainDescribeLayout" >
 
-    <ImageButton
-        android:onClick="onClick"
-        android:id="@+id/x_close_btn"
-        android:background="@drawable/x_close_btn_sel"
-        android:layout_gravity="end"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_weight="0.15"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.75"
-        android:orientation="vertical"
-        android:weightSum="1">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="35sp"
-                android:text="BGM"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="0.5"/>
-
-            <ImageButton
-                android:id="@+id/bgm_switch"
-                android:background="@drawable/bgm_switch_on"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:onClick="onClick"/>
-        </LinearLayout>
+    <FrameLayout
+        android:id="@+id/des_popup"
+        android:layout_width="350dp"
+        android:layout_height="230dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:layout_height="match_parent" >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="35sp"
-                android:text="NARR"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="30dp"
-                android:layout_weight="0.5"/>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_weight="1112"
+                android:background="@drawable/gen_popup"
+                android:orientation="vertical"
+                android:padding="15dp" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="133"
+                    android:background="@drawable/starline"
+                    android:paddingBottom="11dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/option_title" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="709"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="46" >
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="106" >
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="50"
+                            android:paddingLeft="40dp"
+                            android:paddingRight="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/bgm" />
+
+                        <ImageButton
+                            android:id="@+id/bgm_switch"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="50"
+                            android:background="@android:color/transparent"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/switch_on" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="62" >
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="106" >
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="50"
+                            android:paddingLeft="50dp"
+                            android:paddingRight="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/narration" />
+
+                        <ImageButton
+                            android:id="@+id/narr_switch"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="50"
+                            android:background="@android:color/transparent"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/switch_on" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="77" >
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--adjustViewBounds : 비율  cropToPadding : 여백을 맞추기 위해 이미지 일부를 자른다-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
             <ImageButton
-                android:id="@+id/narr_switch"
-                android:background="@drawable/narr_switch_on"
-                android:layout_width="wrap_content"
+                android:id="@+id/x_close_btn"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:onClick="onClick"/>
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="20dp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:baselineAlignBottom="true"
+                android:onClick="onClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/describe_cross_btn" />
 
-    </LinearLayout>
-    <!--<LinearLayout-->
-    <!--android:layout_weight="0.1"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0dp"/>-->
+        </RelativeLayout>
+
+    </FrameLayout>
 </LinearLayout>

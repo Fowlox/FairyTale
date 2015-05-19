@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ public class MainDescribeActivity extends Activity {
     }
 
     public void onClick(View view) {
-        TextView text = (TextView) findViewById(R.id.current_page);
+        //TextView text = (TextView) findViewById(R.id.current_page);
         TextView des = (TextView) findViewById(R.id.describe_text);
         ImageButton rightBtn = (ImageButton) findViewById(R.id.right_btn);
         ImageButton leftBtn = (ImageButton) findViewById(R.id.left_btn);
@@ -41,7 +42,7 @@ public class MainDescribeActivity extends Activity {
             case R.id.left_btn:
                 --counter;
                 changeText(counter);
-                text.setText(counter + "/5");
+                //text.setText(counter + "/5");
                 if (counter == 1) {
                     leftBtn.setVisibility(View.INVISIBLE);
                 }
@@ -51,7 +52,7 @@ public class MainDescribeActivity extends Activity {
             case R.id.right_btn:
                 ++counter;
                 changeText(counter);
-                text.setText(counter + "/5");
+                //text.setText(counter + "/5");
                 if (counter == 5) {
                     rightBtn.setVisibility(View.INVISIBLE);
                 }

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">FairyTale</string>
+    <string name="intro_popup_title">새로운 버전</string>
+    <string name="intro_popup_content">새로운 버전의 어플리케이션이 있습니다.\n스토어 페이지로 이동합니다.</string>
+    <string name="inrto_popup_confitm">이동</string>
+    <string name="intro_popup_exit">종료</string>
+    <string name="intro_version_check">버전 확인중입니다.</string>
+    <string name="intro_update_check">업데이트 정보를 확인중입니다.</string>
+    <string name="debug_msg">테스트</string>
     <string name="exitToast">\'뒤로\'버튼 한번 더 누르시면 종료됩니다.</string>
-    <string name="app_name">ImageTest</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="Narration">Narr</string>
@@ -11,5 +19,11 @@
     <string name="des3">설명창3입니다.</string>
     <string name="des4">설명창4입니다.</string>
     <string name="des5">설명창5입니다.</string>
+    <string name="title_activity_game_puzzle">GamePuzzleActivity</string>
+    <color name="puzzle_background_color">#FDB05E</color>
+    <color name="puzzle_background_color_2">#0C9D19</color>
+    <color name="Black">#000000</color>
+    <color name="White">#FFFFFF</color>
+    <string name="popup_txt">좋아. 외투쯤이야!\n후우~후우~후우~</string>
 
 </resources>
