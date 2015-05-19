@@ -45,7 +45,6 @@ public class ShakeLayout extends BaseLayout{
 			ani_drawer.addFrame(bitmaps[loop], duration);
 		}
 		shake_scene.setImageDrawable(ani_drawer);
-		shake_scene.setImageResource(R.drawable.scene21_1);
 	}
 	
 	public void startAnimation(){
