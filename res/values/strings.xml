@@ -20,7 +20,7 @@
     <string name="des4">설명창4입니다.</string>
     <string name="des5">설명창5입니다.</string>
     <string name="title_activity_game_puzzle">GamePuzzleActivity</string>
-    <string name="action_settings">Settings</string>
+    <string name="story1_title">북풍과 태양</string>
     <color name="puzzle_background_color">#FDB05E</color>
     <color name="puzzle_background_color_2">#0C9D19</color>
     <color name="Black">#000000</color>

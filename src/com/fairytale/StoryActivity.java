@@ -39,6 +39,22 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 
 		sceneInit();
 	}
+	protected void onDestory(){
+		super.onDestroy();
+		story_sound.release();
+	}
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (resultCode) {
+		case 0:
+			scene_no++;
+			//layout.setBtnVisible(StoryLayout.INVISIBLE);
+			sceneInit();
+			break;
+		default:
+			break;
+		}
+	}
 	
 	public boolean isPlaying(){
 		return story_sound.isPlaying();
@@ -178,10 +194,10 @@ public class StoryActivity extends Activity implements StoryLayout.Listener {
 		// TODO Auto-generated method stub
 		story_sound.release();
 		if(scene_no == 12){
-			
-		}
-		if(scene_no == 25){
-			layout.recycleBitmap();
+			Intent audioSensorGame = new Intent(this, AudioSensorGameActivity.class);
+			startActivityForResult(audioSensorGame,0);
+			mLog.d("is finish ASG?");
+		}else if(scene_no == 25){
 			Intent puzzleGameAct = new Intent(this, GamePuzzleActivity.class);
 	        startActivity(puzzleGameAct);
 			finish();

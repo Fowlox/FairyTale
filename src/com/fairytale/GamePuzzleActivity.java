@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class GamePuzzleActivity extends Activity {
 
@@ -20,6 +21,8 @@ public class GamePuzzleActivity extends Activity {
 		Log.i("tag","Message2");
 		setContentView(R.layout.activity_game_puzzle);
 		Log.i("tag","Message3");
+		
+		((TextView)findViewById(R.id.puzzle_title)).setText(R.string.story1_title);
 		
 		findViewById(R.id.puzzle_imageView1).setOnTouchListener(mTouchListener);
 		findViewById(R.id.puzzle_imageView2).setOnTouchListener(mTouchListener);

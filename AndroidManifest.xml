@@ -8,12 +8,15 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
     <uses-permission android:name="android.permission.INTERNET"/>
-
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
+        android:largeHeap="true"
         android:label="@string/app_name"
-        android:theme= "@android:style/Theme.NoTitleBar.Fullscreen" >
+        android:theme= "@android:style/Theme.NoTitleBar.Fullscreen">
         <activity
             android:name=".IntroActivity"
             android:label="@string/app_name"
@@ -48,6 +51,10 @@
         </activity>
         <activity 
             android:name=".StoryActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity 
+            android:name=".AudioSensorGameActivity"
             android:screenOrientation="landscape">
         </activity>
         <activity

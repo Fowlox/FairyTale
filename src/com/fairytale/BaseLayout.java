@@ -15,7 +15,7 @@ public class BaseLayout {
 		return view.findViewById(id);
 	}
 	public View getView(){
-		mLog.d("Get View");
+		mLog.d("Get View: "+view.getId());
 		return view;
 	}
 }
